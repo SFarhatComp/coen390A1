@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="SharedPref">MySharedPreferenceName</string>
+    <string name="First_Event_Name_Key">First_Event_Custom_Name</string>
+    <string name="Second_Event_Name_Key">Second_Event_Custom_Name</string>
+    <string name="Third_Event_Name_Key">Third_Event_Custom_Name</string>
+    <string name="Max_No_Count_Key">Max_No_Custom_Input</string>
+    <string name="CounterA">CounterA_</string>
+    <string name="CounterB">CounterB_</string>
+    <string name="CounterC">CounterC_</string>
+    <string name="TotalCounter">TotalCounter_</string>
+
+</resources>

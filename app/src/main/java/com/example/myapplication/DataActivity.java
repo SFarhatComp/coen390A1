@@ -43,9 +43,9 @@ public class DataActivity extends AppCompatActivity {
         InitialiseEverything();  // this will initialise everything
 
 
-        EventA.setText(" Event A : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterA))+" events");
-        EventB.setText(" Event B : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterB))+" events");
-        EventC.setText(" Event C : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterC))+" events");
+        EventA.setText(SharedPreferenceManagerObject.getName(getString(R.string.First_Event_Name_Key)) +" : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterA))+" events");
+        EventB.setText(SharedPreferenceManagerObject.getName(getString(R.string.Second_Event_Name_Key)) +" : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterB))+" events");
+        EventC.setText(SharedPreferenceManagerObject.getName(getString(R.string.Third_Event_Name_Key)) +" : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterC))+" events");
         TotalCount.setText("Total Count : " + SharedPreferenceManagerObject.getInt(getString(R.string.TotalCounter)));
 
         //These 4 lines will Set the Text For my Buttons,

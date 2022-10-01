@@ -5,9 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Observable;
 
 public class DataActivity extends AppCompatActivity {
 
@@ -15,11 +22,16 @@ public class DataActivity extends AppCompatActivity {
 
     TextView EventA,EventB,EventC,TotalCount;
     protected SharedPreferenceManager SharedPreferenceManagerObject;
-   /* ListView VerticalList;
-    List ListOfData = new ArrayList();
-    ArrayAdapter <String>adapter;*/
+    ListView VerticalList;
+    ArrayList <String> ListOfData = new ArrayList<String>();
+    ArrayList <String> ListOfData2 = new ArrayList<String>();
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter2;
+
     ImageButton BackKey;
     ImageButton DottedMenu;
+    String TempEvent;
+    String TempCounter;
 
 
 
@@ -27,12 +39,12 @@ public class DataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
-       /* VerticalList=findViewById(R.id.ListViewOfData);
+       VerticalList=findViewById(R.id.ListViewOfData);
 
 
-        adapter = new ArrayAdapter(DataActivity.this, android.R.layout.simple_list_item_1,ListOfData);
-        VerticalList.setAdapter(adapter);
-*/
+
+
+
 
 
         SharedPreferenceManagerObject = new SharedPreferenceManager(getApplicationContext());
@@ -45,16 +57,20 @@ public class DataActivity extends AppCompatActivity {
         DottedMenu=findViewById(R.id.SettingButtonLayout);
 
 
-
-
-
-
         EventA.setText(" Event A : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterA))+" events");
         EventB.setText(" Event B : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterB))+" events");
         EventC.setText(" Event C : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterC))+" events");
         TotalCount.setText("Total Count : " + SharedPreferenceManagerObject.getInt(getString(R.string.TotalCounter)));
+        TempEvent= SharedPreferenceManagerObject.getName(getString(R.string.ArrayList1));
+        TempCounter=SharedPreferenceManagerObject.getName(getString(R.string.ArrayList2));
 
+        ListOfData= unpackingList(TempEvent);
+        ListOfData2=unpackingList(TempCounter);
 
+       adapter = new ArrayAdapter(DataActivity.this, android.R.layout.simple_list_item_1,ListOfData);
+       adapter2 = new ArrayAdapter(DataActivity.this, android.R.layout.simple_list_item_1,ListOfData2);
+
+        VerticalList.setAdapter(adapter);
 
 
         BackKey.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +97,7 @@ public class DataActivity extends AppCompatActivity {
                                 EventA.setText(" Counter 1 : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterA))+" events");
                                 EventB.setText(" Counter 2 : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterB))+" events");
                                 EventC.setText(" Counter 3 : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterC))+" events");
-
+                                VerticalList.setAdapter(adapter2);
                                 return true;
 
 
@@ -101,5 +117,13 @@ public class DataActivity extends AppCompatActivity {
         });
 
     }
+    private ArrayList<String> unpackingList(String a){
+
+
+
+        return  new ArrayList<String>(Arrays.asList(a.split(",")));
+
+    };
+
 
 }

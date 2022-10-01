@@ -9,5 +9,8 @@
     <string name="CounterB">CounterB_</string>
     <string name="CounterC">CounterC_</string>
     <string name="TotalCounter">TotalCounter_</string>
+    <string name="ArrayList1">Array1Event</string>
+    <string name="ArrayList2">Array2Numbers</string>
+
 
 </resources>

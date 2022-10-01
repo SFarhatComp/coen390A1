@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected int CountB = 0;
     protected int CountC = 0;
     protected int MAXNUMBEROFCOUNTS;
-    protected ArrayList<String> inputs= new ArrayList<String>();
+    protected String InputEventsInOrder1 = "";
+    protected String InputEventsInOrder2 = "";
     protected String name1,name2, name3;
     protected String CountMessage = "Total Count ";
     SharedPreferenceManager SharedPreferenceManagerObject;
@@ -86,16 +87,22 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener buttonIncrementEventCountA = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CountA++;
-                inputs.add("Event A");
-                Total = CountB + CountA + CountC;
+                if (!VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt((getString(R.string.Max_No_Count_Key))))) {
+                    CountA++;
+                    Total = CountB + CountA + CountC;
+                    InputEventsInOrder1 += "Event A,";
+                    InputEventsInOrder2 += "1,";
+                }
 
-                if(VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt(getString(R.string.Max_No_Count_Key)))){
+                else {
+
+
                     Toast.makeText(getApplicationContext(),"The Limit has been achieved. Please Stop.",Toast.LENGTH_LONG).show();
                     EventAButton.setClickable(false);
-                    Total--;
-                    CountA--;
                 }
+
+                SharedPreferenceManagerObject.SaveName(getString((R.string.ArrayList1)),InputEventsInOrder1);
+                SharedPreferenceManagerObject.SaveName(getString((R.string.ArrayList2)),InputEventsInOrder2);
                 SharedPreferenceManagerObject.SaveCount(getString(R.string.CounterA),CountA);
                 SharedPreferenceManagerObject.SaveCount(getString(R.string.TotalCounter),Total);
                 CountMessage = String.format("Total Count: %s", Total);
@@ -107,21 +114,26 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener buttonIncrementEventCountB = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CountB++;
-                inputs.add("Event B");
-                Total = CountB + CountA + CountC;
 
 
-                if(VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt(getString(R.string.Max_No_Count_Key)))){
+                if (!VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt((getString(R.string.Max_No_Count_Key))))) {
+                    CountB++;
+                    Total = CountB + CountA + CountC;
+                    InputEventsInOrder1+="Event B,";
+                    InputEventsInOrder2+="2,";
+                }
 
+                else {
 
                     Toast.makeText(getApplicationContext(),"The Limit has been achieved. Please Stop.",Toast.LENGTH_LONG).show();
                     EventBButton.setClickable(false);
-                    Total--;
-                    CountB--;
+
                 }
 
 
+
+                SharedPreferenceManagerObject.SaveName(getString((R.string.ArrayList1)),InputEventsInOrder1);
+                SharedPreferenceManagerObject.SaveName(getString((R.string.ArrayList2)),InputEventsInOrder2);
                 SharedPreferenceManagerObject.SaveCount(getString(R.string.CounterB),CountB);
 
                 SharedPreferenceManagerObject.SaveCount(getString(R.string.TotalCounter),Total);
@@ -134,15 +146,23 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener buttonIncrementEventCountC = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (!VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt((getString(R.string.Max_No_Count_Key))))){
                 CountC++;
-                inputs.add("Event C");
                 Total = CountB + CountA + CountC;
-                if(VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt(getString(R.string.Max_No_Count_Key)))){
+                InputEventsInOrder1+="Event C,";
+                InputEventsInOrder2+="3,";
+                }
+
+                else {
+
                     Toast.makeText(getApplicationContext(),"The Limit has been achieved. Please Stop.",Toast.LENGTH_LONG).show();
                     EventCButton.setClickable(false);
-                    Total--;
-                    CountC--;
+
                 }
+
+                SharedPreferenceManagerObject.SaveName(getString((R.string.ArrayList1)),InputEventsInOrder1);
+                SharedPreferenceManagerObject.SaveName(getString((R.string.ArrayList2)),InputEventsInOrder2);
                 SharedPreferenceManagerObject.SaveCount(getString(R.string.CounterC),CountC);
                 SharedPreferenceManagerObject.SaveCount(getString(R.string.TotalCounter),Total);
                 CountMessage = String.format("Total Count: %s", Total);
@@ -218,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean VerifyCounterSize(int Total, int Max){
 
-        if (Total > Max) {
+        if (Total == Max) {
 
             return true ;
         }

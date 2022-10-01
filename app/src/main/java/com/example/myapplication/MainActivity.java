@@ -2,18 +2,14 @@ package com.example.myapplication;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupUI();
+        InitialiseEverything();
 
     }
 
@@ -74,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void setupUI() {
+    private void InitialiseEverything() {
         EditTotalCount = findViewById(R.id.TotalCountText);
         EventAButton = findViewById(R.id.ButtonEventA);
         EventBButton = findViewById(R.id.ButtonEventB);
@@ -84,13 +80,14 @@ public class MainActivity extends AppCompatActivity {
         EditTotalCount.setText("Total count: ");
         SharedPreferenceManagerObject = new SharedPreferenceManager(getApplicationContext());
 
+
         View.OnClickListener buttonIncrementEventCountA = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt((getString(R.string.Max_No_Count_Key))))) {
                     CountA++;
                     Total = CountB + CountA + CountC;
-                    InputEventsInOrder1 += "Event A,";
+                    InputEventsInOrder1 += (SharedPreferenceManagerObject.getName(getString(R.string.First_Event_Name_Key))+",");
                     InputEventsInOrder2 += "1,";
                 }
 
@@ -119,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt((getString(R.string.Max_No_Count_Key))))) {
                     CountB++;
                     Total = CountB + CountA + CountC;
-                    InputEventsInOrder1+="Event B,";
+                    InputEventsInOrder1+=(SharedPreferenceManagerObject.getName(getString(R.string.Second_Event_Name_Key))+",");
                     InputEventsInOrder2+="2,";
                 }
 
@@ -150,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!VerifyCounterSize(Total,SharedPreferenceManagerObject.getInt((getString(R.string.Max_No_Count_Key))))){
                 CountC++;
                 Total = CountB + CountA + CountC;
-                InputEventsInOrder1+="Event C,";
+                InputEventsInOrder1+=(SharedPreferenceManagerObject.getName(getString(R.string.Third_Event_Name_Key))+",");
                 InputEventsInOrder2+="3,";
                 }
 
@@ -195,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view){
 
 
-                GoToDataActivity();
+                GoToDataActivity(CountA);
 
             }
 
@@ -213,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    ;
+
     private void GoToSettingActivity() {
 
         Intent intent = new Intent(this, SettingsActivity.class);
@@ -223,18 +220,23 @@ public class MainActivity extends AppCompatActivity {
         // this method will allow to go to settings, take hte value we need and come back from setting
     }
 
-    ;
 
-    private void GoToDataActivity() {
 
+    private void GoToDataActivity(int a) {
+
+        if (a==0){
+
+            return;
+        }
+        else {
         Intent intent = new Intent(this, DataActivity.class);
 
         startActivity(intent);
-
+        }
         // this method will allow to go to settings, take hte value we need and come back from setting
     }
 
-    ;
+
 
     private boolean VerifyCounterSize(int Total, int Max){
 

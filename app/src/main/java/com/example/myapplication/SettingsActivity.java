@@ -1,13 +1,6 @@
 package com.example.myapplication;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +8,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 public class SettingsActivity extends AppCompatActivity {
 
     protected EditText NameEventA, NameEventB, NameEventC, MaxCount;
     protected Button SaveButton;
     protected int MaxNumberCount;
-    protected String NameA, NameB, NameC,StringMaxNumberCount;
+    protected String NameA;
+
+    protected String NameB, NameC,StringMaxNumberCount;
+
     protected SharedPreferenceManager SharedPreferenceManagerObject;
     protected ImageButton DottedMenu;
     protected ImageButton BackKey;
@@ -36,30 +31,10 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         SharedPreferenceManagerObject = new SharedPreferenceManager(getApplicationContext());
-        SetupUI();
+        InitialiseEverything();
 
 
-    }
-
-    ;
-
-    protected void SetupUI() {
-
-        NameEventA = findViewById(R.id.EventACustomName);
-        NameEventB = findViewById(R.id.EventBCustomName);
-        NameEventC = findViewById(R.id.EventCCustomName);
-        MaxCount = findViewById(R.id.MaxNumberOfCounts);
-        SaveButton = findViewById(R.id.SaveButton);
-        DottedMenu =findViewById(R.id.SettingButtonLayout);
-        BackKey = findViewById(R.id.BackButton);
-        NameEventA.setEnabled(false);
-        NameEventB.setEnabled(false);
-        NameEventC.setEnabled(false);
-        MaxCount.setEnabled(false);
-        SaveButton.setVisibility(View.INVISIBLE);
-
-
-
+        // Function for ON click of BackKey
         BackKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +43,8 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+
+        // Function for On Click of DottedMenu
 
         DottedMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,22 +63,20 @@ public class SettingsActivity extends AppCompatActivity {
                                 NameEventC.setEnabled(true);
                                 MaxCount.setEnabled(true);
                                 SaveButton.setVisibility(View.VISIBLE);
-
                                 return true;
-
 
                             default:
                                 return true;
                         }
-                    };
+                    }
                 });
-
-
-
                                 popupMenu.show();
 
             }
         });
+
+
+        // On click behaviour of the Save Button
         SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +100,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if (NameA.equals("") || NameB.equals("") || NameC.equals("") || 5>MaxNumberCount||MaxNumberCount>200) {
                     CallError();
                     return;
-                };
+                }
 
                 SavingVariablesResetingVraiables();
                 finish();
@@ -133,17 +108,37 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-
-
-    };
+    }
 
 
 
-    private void CallError(){Toast.makeText(getApplicationContext(),"The input are invalid",Toast.LENGTH_LONG).show();};
+    private void CallError(){Toast.makeText(getApplicationContext(),"The input are invalid",Toast.LENGTH_LONG).show();} // Error Call for invalid inputs
 
 
+ // Initialiser
+    protected void InitialiseEverything() {
+
+        NameEventA = findViewById(R.id.EventACustomName);
+        NameEventB = findViewById(R.id.EventBCustomName);
+        NameEventC = findViewById(R.id.EventCCustomName);
+        MaxCount = findViewById(R.id.MaxNumberOfCounts);
+        SaveButton = findViewById(R.id.SaveButton);
+        DottedMenu =findViewById(R.id.SettingButtonLayout);
+        BackKey = findViewById(R.id.BackButton);
+
+
+        NameEventA.setEnabled(false);
+        NameEventB.setEnabled(false);
+        NameEventC.setEnabled(false);
+        MaxCount.setEnabled(false);
+        SaveButton.setVisibility(View.INVISIBLE);
+
+    }
+
+
+
+    // Savingg Variables to the Shared Preferences
     private void SavingVariablesResetingVraiables(){
-
         SharedPreferenceManagerObject.SaveName(getString(R.string.First_Event_Name_Key), NameA);
         SharedPreferenceManagerObject.SaveName(getString(R.string.Second_Event_Name_Key), NameB);
         SharedPreferenceManagerObject.SaveName(getString(R.string.Third_Event_Name_Key), NameC);
@@ -153,9 +148,10 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferenceManagerObject.SaveCount(getString(R.string.CounterC),0);
         SharedPreferenceManagerObject.SaveCount(getString(R.string.TotalCounter),0);
 
-
-    };
-
+    }
 
 }
+
+
+
 

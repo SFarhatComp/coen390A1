@@ -48,7 +48,7 @@ public class DataActivity extends AppCompatActivity {
         EventC.setText(SharedPreferenceManagerObject.getName(getString(R.string.Third_Event_Name_Key)) +" : " + SharedPreferenceManagerObject.getInt(getString(R.string.CounterC))+" events");
         TotalCount.setText("Total Count : " + SharedPreferenceManagerObject.getInt(getString(R.string.TotalCounter)));
 
-        //These 4 lines will Set the Text For my Buttons,
+        //These 4 lines will Set the Text For my Buttons, we get the values dynamically
 
 
         TempEvent= SharedPreferenceManagerObject.getName(getString(R.string.ArrayList1));

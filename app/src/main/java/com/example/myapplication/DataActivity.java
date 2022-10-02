@@ -1,3 +1,5 @@
+//SAMI FARHAT 40097236 ASSIGNMENT 1 COEN 390
+
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -80,9 +82,9 @@ public class DataActivity extends AppCompatActivity {
         DottedMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu= new PopupMenu(DataActivity.this,view);
-                popupMenu.getMenuInflater().inflate(R.menu.popupmenu2,popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                PopupMenu DottedMenu= new PopupMenu(DataActivity.this,view);
+                DottedMenu.getMenuInflater().inflate(R.menu.popupmenu2,DottedMenu.getMenu());
+                DottedMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
@@ -100,7 +102,7 @@ public class DataActivity extends AppCompatActivity {
                         }
                     };
                 });
-                popupMenu.show();
+                DottedMenu.show();
 
             }
         }); // What does the dotted menu do,

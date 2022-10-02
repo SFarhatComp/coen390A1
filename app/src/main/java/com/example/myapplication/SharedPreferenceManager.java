@@ -1,3 +1,5 @@
+//SAMI FARHAT 40097236 ASSIGNMENT 1 COEN 390
+
 package com.example.myapplication;
 
 import android.content.Context;

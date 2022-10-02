@@ -1,3 +1,5 @@
+//SAMI FARHAT 40097236 ASSIGNMENT 1 COEN 390
+
 package com.example.myapplication;
 
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         CountB=SharedPreferenceManagerObject.getInt(getString(R.string.CounterB));
         CountC=SharedPreferenceManagerObject.getInt(getString(R.string.CounterC));
         Total=SharedPreferenceManagerObject.getInt(getString(R.string.TotalCounter));
+        InputEventsInOrder1=SharedPreferenceManagerObject.getName((getString(R.string.ArrayList1)));
+        InputEventsInOrder2=SharedPreferenceManagerObject.getName((getString(R.string.ArrayList2)));
         EventAButton.setClickable(true);
         EventBButton.setClickable(true);
         EventCButton.setClickable(true);

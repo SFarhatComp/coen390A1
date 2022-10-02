@@ -1,3 +1,5 @@
+//SAMI FARHAT 40097236 ASSIGNMENT 1 COEN 390
+
 package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,9 +51,9 @@ public class SettingsActivity extends AppCompatActivity {
         DottedMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu= new PopupMenu(SettingsActivity.this,view);
-                popupMenu.getMenuInflater().inflate(R.menu.settingpop,popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                PopupMenu DottedMenu= new PopupMenu(SettingsActivity.this,view);
+                DottedMenu.getMenuInflater().inflate(R.menu.settingpop,DottedMenu.getMenu());
+                DottedMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
@@ -70,7 +72,7 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     }
                 });
-                                popupMenu.show();
+                DottedMenu.show();
 
             }
         });
@@ -147,6 +149,9 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferenceManagerObject.SaveCount(getString(R.string.CounterB),0);
         SharedPreferenceManagerObject.SaveCount(getString(R.string.CounterC),0);
         SharedPreferenceManagerObject.SaveCount(getString(R.string.TotalCounter),0);
+        SharedPreferenceManagerObject.SaveName(getString(R.string.ArrayList1),"");
+        SharedPreferenceManagerObject.SaveName(getString(R.string.ArrayList2),"");
+
 
     }
 
